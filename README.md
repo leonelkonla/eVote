@@ -27,10 +27,9 @@ Beschreibung und Frist.
 ## Entwicklung
 Die Entwicklung erfolgt über eigene Git-Branches. Wird aber im main-branch als stabile version des Projekts verschoben.
 
-##
 
 
-### Was ist Git 
+### Was ist Git?
 Kurz gesagt ein Versionskontrollsystem, es speichert Entwicklungszustände von Datein über den Projektverlauf hinweg. Es gehört mittlerweile zu der grundlegenden Arbeitsweise der Entwicklungsbranche(besonders im Open Source Bereich) und wurde speziell für die Zusammenarbeit von vielen Entwickler:innen von Linus Torvalds entwickelt. 
 Dabei wird auf ein dezentrales System gesetzt, jede Person hat eine vollständige Kopie des Projekts oder "Repositories" und auch den gesamten Verlauf lokal auf dem Rechner. Es braucht einen zentralen Computer nur zum Austausch der eingereichten Arbeit. 
 
@@ -54,4 +53,15 @@ More diff commands (effektiver Vergleich mit anderen Diff-Befehlen)
 Mit den Branches können unterschiedliche Personen und Kontexte oder Aufgaben getrennt werden. 
 Mergekonflikte können auftauchen wenn Inhalte verschiedener Branches zusammengefügt(gemerged) werden. Konflikt bedeutet das an gleichen Stellen in der selben Datei unterschiedliche Inhalte stehen. Beim Lösen der Konflikte helfen moderne IDE's oder Anwendungen wie Github Desktop, die die Differenzbereiche hervorheben sodass dann entschieden werden kann welche Änderung gemacht weden soll.
 
+### Lokal Repository und Remote Repository
+**Working Directory:** Lokal auf deinem Rechner, alle deine Änderungen werden hier gespeichert.
+**Staging Area:** Mit *git add* wählst du aus, welche Änderungen in den nächsten Commit sollen.
+**Repository:** Mit *git commit* werden die vorgemerkten Änderungen dauerhaft als Version gespeichert.
 
+### Github als Austauschplattform und Backup des Repositories
+Github bietet als Plattform das Zuhause und die Zentrale Verwaltungsstelle für Projektdateien und Projektmanagement, hier werden committe Änderungen angezeigt und andere Personen können diese bei sich runterladen um sie zu Testen oder daran weiterzuarbeiten. 
+
+### Beiträge im Team 
+- **Leonel:** Init des Projekts, Abschnitte "Projektbeschreibung", "Funktioonale Anforderungen aus dem Kurs", "Technologien", "Entwicklung"
+
+- **Jannis:** "Was ist Git?", "Warum sollte Git verwendet werden?", "Wichtige Grundbefehle von Git", "Branches und Merge-Konflikte", "Lokal Repository und Remote Repository", "Github als Austauschplattform "
