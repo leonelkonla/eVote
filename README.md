@@ -25,6 +25,12 @@ Beschreibung und Frist.
 - usw.
 
 ## Entwicklung
-Die Entwicklung erfolgt über eigene Git-Branches.Wird aber im main-branch als stabile version des Projekts verschoben.
+Die Entwicklung erfolgt über eigene Git-Branches. Wird aber im main-branch als stabile version des Projekts verschoben.
 
 ##
+
+### Was ist Git 
+Kurz gesagt ein Versionskontrollsystem, es speichert Entwicklungszustände von Datein über den Projekt Verlauf hinweg. Es gehört mittlerweile zu der grundlegenden Arbeitsweise der Entwicklungsbranche(besonders im Open Source Bereich) und wurde speziell für die Zusammenarbeit von vielen Entwickler:innen von Linus Torvalds entwickelt. 
+Dabei wird auf ein verteiltes System gesetzt, jede Person hat eine vollständige Kopie des Projekts oder "Repositories" und auch den gesamten Verlauf lokal auf dem Rechner. Es braucht einen zentralen Computer nur zum Austausch. 
+
+Prominente implementierungen von Git sind GitHub, GitLab oder Bitbucket. 
