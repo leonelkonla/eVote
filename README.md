@@ -33,7 +33,7 @@ Die Entwicklung erfolgt über eigene Git-Branches. Wird aber im main-branch als 
 Kurz gesagt ein Versionskontrollsystem, es speichert Entwicklungszustände von Datein über den Projektverlauf hinweg. Es gehört mittlerweile zu der grundlegenden Arbeitsweise der Entwicklungsbranche(besonders im Open Source Bereich) und wurde speziell für die Zusammenarbeit von vielen Entwickler:innen von Linus Torvalds entwickelt. 
 Dabei wird auf ein dezentrales System gesetzt, jede Person hat eine vollständige Kopie des Projekts oder "Repositories" und auch den gesamten Verlauf lokal auf dem Rechner. Es braucht einen zentralen Computer nur zum Austausch der eingereichten Arbeit. 
 
-Prominente implementierungen von Git sind GitHub, GitLab oder Bitbucket. 
+Prominente Implementierungen von Git sind GitHub, GitLab oder Bitbucket. 
 
 ### Warum sollte Git verwendet werden?
 Die Verwendung einer Versionskontrolle hilft dabei den Komplexen und zum Teil schwierig zu durchschauenden Entwicklungsprozess zu organisieren und besser nachvollziehbar zu machen. Es verbessert die Möglichkeit das verscheidene Personen parallel an dem gleichen Projekt arbeiten können und Fehler nachträglich rückgängig gemacht werden können. 
