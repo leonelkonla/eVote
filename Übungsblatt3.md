@@ -162,6 +162,10 @@ Für Event-Storming, Diagramm-Ordner schauen.
 | StimmzettelRepository | save(), findByAbstimmung() |
 | ErgebnisRepository | findByAbstimmung(), save() |
 
-# 
+# Aufgabe 6
+
+
+
+
 
 
