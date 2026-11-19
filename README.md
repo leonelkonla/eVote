@@ -1,4 +1,7 @@
 # eVote
+
+# Erstellung einer Java-Anwendung im Modul Moderne Softwareentwicklung
+
 Willkommen in unserem Semesterprojekt im Modul Moderne Softwareentwicklung!
 
 ## Projektbeschreibung
