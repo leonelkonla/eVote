@@ -26,48 +26,7 @@ Die Entwicklung erfolgt über eigene Git-Branches. Wird aber im main-branch als 
 
 ## Ordnerstruktur
 
-eVote/
-├── src/main/java/
-│   └── de/evote/
-│       ├── domain/
-│       │   ├── Nutzer.java
-│       │   ├── Buerger.java
-│       │	└── uws...
-│       ├── application/
-│       │   ├── 
-│       │   └── ....
-│       │
-│       ├── infrastructure/
-│       │   ├── InMemoryAbstimmungRepository.java
-│       │   └── InMemoryStimmabgabeRepository.java
-│       │
-│       ├── ui/
-│       │   └── ...
-│       │
-│       └── Main.java
-│
-├── src/main/resources/
-│
-├── src/test/java/
-│   └── de/evote/
-│       ├── AbstimmungTest.java
-│       ├── AbstimmungszeitraumTest.java
-│       └── StimmabgabeServiceTest.java
-│
-├── docs/
-│   └── Diagramme/
-│       ├── 
-│       ├── 
-│       └── 
-│
-├── .github/
-│   └── workflows/
-│       └── ci.yml
-│
-├── .gitignore
-├── pom.xml
-├── README.md
-└── usw.
+	Wird kontinuierlich aufgebaut.
 
 ## Architektur
 
