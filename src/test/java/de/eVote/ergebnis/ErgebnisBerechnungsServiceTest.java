@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import de.evote.ergebnis.ErgebnisBerechnungsService;
+import de.evote.ergebnis.Abstimmungsergebnis;
+import java.util.List;
 
 public class ErgebnisBerechnungsServiceTest {
 
@@ -130,5 +132,29 @@ void testProzentanteileOhneStimmen() {
     assertEquals(0.0, ergebnis.get("A"), 0.001);
     assertEquals(0.0, ergebnis.get("B"), 0.001);
     assertEquals(0.0, ergebnis.get("C"), 0.001);
+}
+
+@Test
+void testErstelleErgebnis() {
+
+    ErgebnisBerechnungsService service =
+            new ErgebnisBerechnungsService();
+
+    List<String> stimmen =
+            List.of("A", "A", "A", "B", "B");
+
+    List<String> optionen =
+            List.of("A", "B");
+
+    Abstimmungsergebnis ergebnis =
+            service.erstelleErgebnis(stimmen, optionen);
+
+    ergebnis.schliesseAbstimmung();
+
+    assertEquals(3L, ergebnis.getStimmenProOption().get("A"));
+    assertEquals(2L, ergebnis.getStimmenProOption().get("B"));
+
+    assertEquals(60.0, ergebnis.getProzentProOption().get("A"));
+    assertEquals(40.0, ergebnis.getProzentProOption().get("B"));
 }
 }
