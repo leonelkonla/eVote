@@ -1,4 +1,7 @@
 # eVote
+
+# Erstellung einer Java-Anwendung im Modul Moderne Softwareentwicklung
+
 Willkommen in unserem Semesterprojekt im Modul Moderne Softwareentwicklung!
 
 ## Projektbeschreibung
@@ -24,13 +27,30 @@ Beschreibung und Frist.
 ## Entwicklung
 Die Entwicklung erfolgt über eigene Git-Branches. Wird aber im main-branch als stabile version des Projekts verschoben.
 
+## Ordnerstruktur
 
+	Wird kontinuierlich aufgebaut.
+
+## Architektur
+
+Für eVote verwenden wir einen modularen Monolithen mit einer DDD-orientierten Schichtenarchitektur. Die Anwendung ist in die Bereiche UI, Application, Domain und Infrastructure gegliedert. Repository-Schnittstellen entkoppeln die Fachlogik von der Datenspeicherung und folgen dem Ports-&-Adapters-Prinzip der hexagonalen Architektur. Dadurch bleibt das System übersichtlich, modular und gut testbar.
+
+| Schicht| Verantwortung | Beispiel in der Anwendung eVote |
+|---|---|---|
+| UI | Stellt Informationen dar und nimmt Benutzeraktionen entgegen | Bürger klickt auf „Abstimmen“ |
+| Application | Koordiniert die Anwendungsfälle wie Registrierung, Abstimmung und Ergebnisanzeige| StimmabgabeService koordiniert die Stimmabgabe |
+| Domain | Enthält die fachlichen Objekte und Geschäftsregeln | Abstimmung prüft, ob die Abstimmung aktiv ist |
+| Infrastructure | Implementiert die technische Speicherung über Repository-Schnittstellen | Repository speichert Teilnahme und Stimmzettel |
+| Qualitätssicherung| Testet und baut die Anwendung automatisiert| ... |
+
+	Grafische Darstelung im Diagrammenordner
+	
 
 ### Was ist Git?
 Kurz gesagt ein Versionskontrollsystem, es speichert Entwicklungszustände von Datein über den Projektverlauf hinweg. Es gehört mittlerweile zu der grundlegenden Arbeitsweise der Entwicklungsbranche(besonders im Open Source Bereich) und wurde speziell für die Zusammenarbeit von vielen Entwickler:innen von Linus Torvalds entwickelt. 
 Dabei wird auf ein dezentrales System gesetzt, jede Person hat eine vollständige Kopie des Projekts oder "Repositories" und auch den gesamten Verlauf lokal auf dem Rechner. Es braucht einen zentralen Computer nur zum Austausch der eingereichten Arbeit. 
 
-Prominente implementierungen von Git sind GitHub, GitLab oder Bitbucket. 
+Prominente Implementierungen von Git sind GitHub, GitLab oder Bitbucket. 
 
 ### Warum sollte Git verwendet werden?
 Die Verwendung einer Versionskontrolle hilft dabei den Komplexen und zum Teil schwierig zu durchschauenden Entwicklungsprozess zu organisieren und besser nachvollziehbar zu machen. Es verbessert die Möglichkeit das verscheidene Personen parallel an dem gleichen Projekt arbeiten können und Fehler nachträglich rückgängig gemacht werden können. 

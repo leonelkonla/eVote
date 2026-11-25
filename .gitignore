@@ -1,0 +1,20 @@
+# Eclipse: lokale IDE-Einstellungen
+.metadata/
+.project
+.classpath
+.settings/
+
+# Maven: Build-Ergebnisse (entstehen bei jedem Build neu)
+target/
+
+# macOS: Systemdateien vom Finder
+.DS_Store
+
+# Kompilierte Java-Dateien und Logs
+*.class
+*.log
+
+# Persönliche Notizen (nicht hochladen)
+eVote_Aufgabe6_Implementierungsstrategie.md
+/bin/
+/src/
