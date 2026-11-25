@@ -70,18 +70,21 @@ public class ErgebnisBerechnungsService {
         return prozentanteile;
     }
 
-    public Abstimmungsergebnis erstelleErgebnis(
-            List<String> stimmen,
-            List<String> optionen) {
+public Abstimmungsergebnis erstelleErgebnis(
+        String abstimmungId,
+        List<String> stimmen,
+        List<String> optionen) {
 
-        Map<String, Long> stimmenProOption =
-                zaehleAlleOptionen(stimmen, optionen);
+    Map<String, Long> stimmenProOption =
+            zaehleAlleOptionen(stimmen, optionen);
 
-        Map<String, Double> prozentProOption =
-                berechneProzentanteile(stimmenProOption);
+    Map<String, Double> prozentProOption =
+            berechneAlleProzentanteile(stimmen, optionen);
 
-        return new Abstimmungsergebnis(
-                stimmenProOption,
-                prozentProOption);
-    }
+    return new Abstimmungsergebnis(
+            abstimmungId,
+            stimmenProOption,
+            prozentProOption
+    );
+}
 }
