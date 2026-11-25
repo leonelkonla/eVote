@@ -2,6 +2,7 @@
 package de.evote.ergebnis;
 
 import java.util.Map;
+import java.time.Instant;
 
 public class Abstimmungsergebnis {
 
@@ -10,6 +11,7 @@ public class Abstimmungsergebnis {
     private final Map<String, Double> prozentProOption;
 
     private boolean abstimmungGeschlossen = false;
+    private boolean veroeffentlicht = false;
 
     public Abstimmungsergebnis(
             String abstimmungId,
@@ -31,26 +33,37 @@ public class Abstimmungsergebnis {
         return abstimmungId;
     }
 
-    public Map<String, Long> getStimmenProOption() {
+    private void pruefeVeroeffentlichung() {
 
-        if (!abstimmungGeschlossen) {
+        if (!veroeffentlicht) {
             throw new IllegalStateException(
-                    "Die Abstimmung ist noch nicht geschlossen."
+                    "Das Ergebnis wurde noch nicht veröffentlicht."
             );
         }
+    }
 
+    public Map<String, Long> getStimmenProOption() {
+        pruefeVeroeffentlichung();
         return stimmenProOption;
     }
 
     public Map<String, Double> getProzentProOption() {
-
-        if (!abstimmungGeschlossen) {
-            throw new IllegalStateException(
-                    "Die Abstimmung ist noch nicht geschlossen."
-            );
-        }
-
+        pruefeVeroeffentlichung();
         return prozentProOption;
+    }
+
+    public long stimmenFuer(String optionId) {
+        pruefeVeroeffentlichung();
+        return stimmenProOption.getOrDefault(optionId, 0L);
+    }
+
+    public long getGesamtStimmen() {
+        pruefeVeroeffentlichung();
+
+        return stimmenProOption.values()
+                .stream()
+                .mapToLong(Long::longValue)
+                .sum();
     }
 
     public void schliesseAbstimmung() {
@@ -59,6 +72,32 @@ public class Abstimmungsergebnis {
 
     public boolean istAbstimmungGeschlossen() {
         return abstimmungGeschlossen;
+    }
+
+    public boolean istVeroeffentlicht() {
+        return veroeffentlicht;
+    }
+
+    public ErgebnisVeroeffentlicht veroeffentlicheErgebnis() {
+
+        if (!abstimmungGeschlossen) {
+            throw new IllegalStateException(
+                    "Die Abstimmung ist noch nicht geschlossen."
+            );
+        }
+
+        if (veroeffentlicht) {
+            throw new IllegalStateException(
+                    "Das Ergebnis wurde bereits veröffentlicht."
+            );
+        }
+
+        this.veroeffentlicht = true;
+
+        return new ErgebnisVeroeffentlicht(
+                abstimmungId,
+                Instant.now()
+        );
     }
 
     public void verarbeiteAbstimmungGeschlossen(

@@ -5,14 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import java.util.Map;
 import java.time.Instant;
-
 import org.junit.jupiter.api.Test;
-
 import de.evote.ergebnis.Abstimmungsergebnis;
 import de.evote.ergebnis.AbstimmungGeschlossen;
+import de.evote.ergebnis.ErgebnisVeroeffentlicht;
 
 public class AbstimmungsergebnisTest {
 
@@ -37,6 +35,7 @@ public class AbstimmungsergebnisTest {
                 );
 
         ergebnis.schliesseAbstimmung();
+        ergebnis.veroeffentlicheErgebnis();
 
         assertEquals(3L, ergebnis.getStimmenProOption().get("A"));
         assertEquals(2L, ergebnis.getStimmenProOption().get("B"));
@@ -55,6 +54,7 @@ public class AbstimmungsergebnisTest {
                 );
 
         assertFalse(ergebnis.istAbstimmungGeschlossen());
+        assertFalse(ergebnis.istVeroeffentlicht());
     }
 
     @Test
@@ -67,13 +67,10 @@ public class AbstimmungsergebnisTest {
                         Map.of("A", 60.0, "B", 40.0)
                 );
 
-        // Am Anfang ist die Abstimmung offen
         assertFalse(ergebnis.istAbstimmungGeschlossen());
 
-        // Abstimmung schließen
         ergebnis.schliesseAbstimmung();
 
-        // Jetzt muss sie geschlossen sein
         assertTrue(ergebnis.istAbstimmungGeschlossen());
     }
 
@@ -110,7 +107,7 @@ public class AbstimmungsergebnisTest {
     }
 
     @Test
-    void testProzentanteileNachAbschlussSichtbar() {
+    void testProzentanteileNachVeroeffentlichungSichtbar() {
 
         Abstimmungsergebnis ergebnis =
                 new Abstimmungsergebnis(
@@ -120,13 +117,16 @@ public class AbstimmungsergebnisTest {
                 );
 
         ergebnis.schliesseAbstimmung();
+        ergebnis.veroeffentlicheErgebnis();
+
+        assertTrue(ergebnis.istVeroeffentlicht());
 
         assertEquals(60.0, ergebnis.getProzentProOption().get("A"));
         assertEquals(40.0, ergebnis.getProzentProOption().get("B"));
     }
 
     @Test
-    void testErgebnisfreigabeDurchDomainEvent() {
+    void testAbstimmungSchliessenDurchDomainEvent() {
 
         Abstimmungsergebnis ergebnis =
                 new Abstimmungsergebnis(
@@ -144,6 +144,12 @@ public class AbstimmungsergebnisTest {
         ergebnis.verarbeiteAbstimmungGeschlossen(event);
 
         assertTrue(ergebnis.istAbstimmungGeschlossen());
+        assertFalse(ergebnis.istVeroeffentlicht());
+
+        ergebnis.veroeffentlicheErgebnis();
+
+        assertTrue(ergebnis.istVeroeffentlicht());
+
         assertEquals(3L, ergebnis.getStimmenProOption().get("A"));
         assertEquals(60.0, ergebnis.getProzentProOption().get("A"), 0.001);
     }
@@ -170,6 +176,7 @@ public class AbstimmungsergebnisTest {
         );
 
         assertFalse(ergebnis.istAbstimmungGeschlossen());
+        assertFalse(ergebnis.istVeroeffentlicht());
 
         assertThrows(
                 IllegalStateException.class,
@@ -181,4 +188,123 @@ public class AbstimmungsergebnisTest {
                 () -> ergebnis.getProzentProOption()
         );
     }
+
+    @Test
+    void testGeschlosseneAbstimmungNochNichtVeroeffentlicht() {
+
+        Abstimmungsergebnis ergebnis =
+                new Abstimmungsergebnis(
+                        "AB-001",
+                        Map.of("A", 3L, "B", 2L),
+                        Map.of("A", 60.0, "B", 40.0)
+                );
+
+        ergebnis.schliesseAbstimmung();
+
+        assertTrue(ergebnis.istAbstimmungGeschlossen());
+        assertFalse(ergebnis.istVeroeffentlicht());
+
+        assertThrows(
+                IllegalStateException.class,
+                () -> ergebnis.getStimmenProOption()
+        );
+
+        assertThrows(
+                IllegalStateException.class,
+                () -> ergebnis.getProzentProOption()
+        );
+
+        assertThrows(
+                IllegalStateException.class,
+                () -> ergebnis.getGesamtStimmen()
+        );
+
+        assertThrows(
+                IllegalStateException.class,
+                () -> ergebnis.stimmenFuer("A")
+        );
+    }
+
+    @Test
+    void testVeroeffentlichungVorAbschlussNichtErlaubt() {
+
+        Abstimmungsergebnis ergebnis =
+                new Abstimmungsergebnis(
+                        "AB-001",
+                        Map.of("A", 3L, "B", 2L),
+                        Map.of("A", 60.0, "B", 40.0)
+                );
+
+        assertThrows(
+                IllegalStateException.class,
+                () -> ergebnis.veroeffentlicheErgebnis()
+        );
+
+        assertFalse(ergebnis.istVeroeffentlicht());
+    }
+
+    @Test
+    void testGesamtStimmenUndStimmenProOption() {
+
+        Abstimmungsergebnis ergebnis =
+                new Abstimmungsergebnis(
+                        "AB-001",
+                        Map.of("A", 3L, "B", 2L),
+                        Map.of("A", 60.0, "B", 40.0)
+                );
+
+        ergebnis.schliesseAbstimmung();
+        ergebnis.veroeffentlicheErgebnis();
+
+        assertTrue(ergebnis.istVeroeffentlicht());
+
+        assertEquals(5L, ergebnis.getGesamtStimmen());
+        assertEquals(3L, ergebnis.stimmenFuer("A"));
+        assertEquals(2L, ergebnis.stimmenFuer("B"));
+    }
+
+@Test
+void testDomainEventBeiVeroeffentlichung() {
+
+    Abstimmungsergebnis ergebnis =
+            new Abstimmungsergebnis(
+                    "AB-001",
+                    Map.of("A", 3L, "B", 2L),
+                    Map.of("A", 60.0, "B", 40.0)
+            );
+
+    ergebnis.schliesseAbstimmung();
+
+    ErgebnisVeroeffentlicht event =
+            ergebnis.veroeffentlicheErgebnis();
+
+    assertTrue(ergebnis.istVeroeffentlicht());
+
+    assertEquals("AB-001", event.abstimmungId());
+
+    assertTrue(event.zeitpunkt() != null);
+}
+
+@Test
+void testMehrfacheVeroeffentlichungNichtErlaubt() {
+
+    Abstimmungsergebnis ergebnis =
+            new Abstimmungsergebnis(
+                    "AB-001",
+                    Map.of("A", 3L, "B", 2L),
+                    Map.of("A", 60.0, "B", 40.0)
+            );
+
+    ergebnis.schliesseAbstimmung();
+    ergebnis.veroeffentlicheErgebnis();
+
+    assertThrows(
+            IllegalStateException.class,
+            () -> ergebnis.veroeffentlicheErgebnis()
+    );
+
+    assertTrue(ergebnis.istVeroeffentlicht());
+
+    assertEquals(5L, ergebnis.getGesamtStimmen());
+}
 }

@@ -3,6 +3,7 @@ package de.eVote.ergebnis;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.List;
 import java.util.Map;
@@ -174,6 +175,9 @@ public class ErgebnisBerechnungsServiceTest {
 
         assertEquals("AB-001", ergebnis.getAbstimmungId());
 
+        assertFalse(ergebnis.istAbstimmungGeschlossen());
+        assertFalse(ergebnis.istVeroeffentlicht());
+
         AbstimmungGeschlossen event =
                 new AbstimmungGeschlossen(
                         "AB-001",
@@ -183,10 +187,20 @@ public class ErgebnisBerechnungsServiceTest {
         ergebnis.verarbeiteAbstimmungGeschlossen(event);
 
         assertTrue(ergebnis.istAbstimmungGeschlossen());
+        assertFalse(ergebnis.istVeroeffentlicht());
+
+        ergebnis.veroeffentlicheErgebnis();
+
+        assertTrue(ergebnis.istVeroeffentlicht());
 
         assertEquals(3L, ergebnis.getStimmenProOption().get("A"));
         assertEquals(2L, ergebnis.getStimmenProOption().get("B"));
+
         assertEquals(60.0, ergebnis.getProzentProOption().get("A"), 0.001);
         assertEquals(40.0, ergebnis.getProzentProOption().get("B"), 0.001);
+
+        assertEquals(5L, ergebnis.getGesamtStimmen());
+        assertEquals(3L, ergebnis.stimmenFuer("A"));
+        assertEquals(2L, ergebnis.stimmenFuer("B"));
     }
 }
