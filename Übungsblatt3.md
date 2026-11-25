@@ -12,7 +12,7 @@
 
 # Aufgabe 1 – Event Storming
 
-- Zuerst fachliche Ereignisse indentifizieren, die bei eVote stattfinden
+Zuerst fachliche Ereignisse indentifizieren, die bei eVote stattfinden
 
 
 | Nr. | Event | Bedeutung |
@@ -26,9 +26,9 @@
 | 7 | ErgebnisVeroeffentlicht | Resultate wurden freigegeben |
 
 	
-- Zwei wichtigste Events für das Projekt: `StimmeAbgegeben` und `ErgebnisVeroeffentlicht`.
+Zwei wichtigste Events für das Projekt: `StimmeAbgegeben` und `ErgebnisVeroeffentlicht`.
 
-Für Event-Storming, Diagramm-Ordner schauen.
+	Für Event-Storming, Diagramm-Ordner schauen.
 
 # Aufgabe 2 – Domänenmodell erstellen
 
@@ -54,7 +54,7 @@ Für Event-Storming, Diagramm-Ordner schauen.
 - Die Stimmabgabe überprüft die fachlichen Bedingungen und nimmt gültige Stimmen an.
 - Die Ergebnisauswertung berechnet und veröffentlicht die Resultate.
 
---> Diagram im Diagramm-Ordner
+	Diagram im Diagramm-Ordner
 
 # Aufgabe 4 – Entitäten und Aggregate definieren
 
@@ -164,8 +164,47 @@ Für Event-Storming, Diagramm-Ordner schauen.
 
 # Aufgabe 6
 
+Auf Basis des in Aufgaben 1–5 entwickelten Domain-Driven-Design-Modells soll die Implementierung von eVote in kleinen, testbaren Schritten beginnen.
 
 
+## 7. Technische Entscheidung
 
+- Java 25 als Programmiersprache.
+- Modularer Monolith: zunächst eine Anwendung mit klar abgegrenzten fachlichen Modulen, keine Microservices.
+- DDD: Regeln in Entities/Value Objects/Aggregate Roots, orchestrierende Abläufe in Application Services.
+- Repository-Interfaces: Trennung der Domain-Logik von In-Memory- bzw. späterer Datenbankpersistenz.
+- Git und CI: kleinere Commits/PRs, automatisches Kompilieren und Ausführen von Tests; konkretes CI-Werkzeug wird im Team festgelegt.
 
+## 8. Module / Bounded Contexts
+
+| Kontext | Domain Model | Zuständigkeit |
+|---|---|---|
+| Identität & Berechtigung | `Nutzer`, `Buerger`, `Administrator` | Identität, Verifikation, Rollen |
+| Abstimmungsverwaltung | `Abstimmung`, `Abstimmungsoption`, `Abstimmungszeitraum`, `Abstimmungsstatus` | Erstellung, Optionen, Laufzeit, Status |
+| Stimmabgabe | `Teilnahme`, `Stimmzettel` | Prüfen und genau einmal abstimmen |
+| Ergebnisauswertung | `Abstimmungsergebnis` | Stimmen aggregieren und Ergebnisse freigeben |
+
+	Ein Bounded Context ist eine fachliche Modellgrenze
+	
+## 9. Teststrategie (TDD)
+
+(Wird beschrieben...)
+
+## 10. Ordnerstruktur
+
+	Wird kontinuierlich aufgebaut.
+
+## 11. Architektur
+
+Für eVote verwenden wir einen modularen Monolithen mit einer DDD-orientierten Schichtenarchitektur. Die Anwendung ist in die Bereiche UI, Application, Domain und Infrastructure gegliedert. Repository-Schnittstellen entkoppeln die Fachlogik von der Datenspeicherung und folgen dem Ports-&-Adapters-Prinzip der hexagonalen Architektur. Dadurch bleibt das System übersichtlich, modular und gut testbar.
+
+| Schicht| Verantwortung | Beispiel in der Anwendung eVote |
+|---|---|---|
+| UI | Stellt Informationen dar und nimmt Benutzeraktionen entgegen | Bürger klickt auf „Abstimmen“ |
+| Application | Koordiniert die Anwendungsfälle wie Registrierung, Abstimmung und Ergebnisanzeige| StimmabgabeService koordiniert die Stimmabgabe |
+| Domain | Enthält die fachlichen Objekte und Geschäftsregeln | Abstimmung prüft, ob die Abstimmung aktiv ist |
+| Infrastructure | Implementiert die technische Speicherung über Repository-Schnittstellen | Repository speichert Teilnahme und Stimmzettel |
+| Qualitätssicherung| Testet und baut die Anwendung automatisiert| ... |
+
+	Grafische Darstelung im Diagrammenordner
 
