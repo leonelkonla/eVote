@@ -5,17 +5,17 @@
 Willkommen in unserem Semesterprojekt im Modul Moderne Softwareentwicklung!
 
 ## Projektbeschreibung
-'eVote': Online-Absmmungssystem für Bürgerbefragungen: 
-Eine sichere Plattform für Online-Absmmungen, bei der Bürger über städsche Entscheidungen oder Projekte abstimmen können. 
+'eVote': Online-Abstimmungssystem für Bürgerbefragungen: 
+Eine sichere Plattform für Online-Abstimmungen, bei der Bürger über städtische Entscheidungen oder Projekte abstimmen können. 
 
-### Funktioonale Anforderungen aus dem Kurs:
-- Nutzerregistrierung und Authenfizierung: Registrierung für Bürger mit gesicherter Authenfizierung (z.B. durch E-Mail-Bestägung oder 2-Faktor-Authenfizierung). 
-- Absmmungsübersicht: Bürger können sich eine Liste der aktuellen Abstimmungen ansehen, inklusive 
+### Funktionale Anforderungen aus dem Kurs:
+- Nutzerregistrierung und Authentifizierung: Registrierung für Bürger mit gesicherter Authentifizierung (z.B. durch E-Mail-Bestätigung oder 2-Faktor-Authentifizierung). 
+- Abstimmungsübersicht: Bürger können sich eine Liste der aktuellen Abstimmungen ansehen, inklusive 
 Beschreibung und Frist. 
-- Absmmungsmechanismus: Bürger können an den Abstimmungen teilnehmen und ihre Stimmungen abgeben 
+- Abstimmungsmechanismus: Bürger können an den Abstimmungen teilnehmen und ihre Stimme abgeben 
 (einfacher Voting-Mechanismus). 
 - Ergebnisübersicht: Nach Abschluss der Abstimmung können Bürger die Ergebnisse einsehen. 
-- Absmmungssicherheit: Sicherstellen, dass jeder Bürger nur 1x abstimmmt (z. B. durch eindeutige Kennung)
+- Abstimmungssicherheit: Sicherstellen, dass jeder Bürger nur 1x abstimmt (z. B. durch eindeutige Kennung)
 
 
 ## Technologien
@@ -47,13 +47,13 @@ Für eVote verwenden wir einen modularen Monolithen mit einer DDD-orientierten S
 	
 
 ### Was ist Git?
-Kurz gesagt ein Versionskontrollsystem, es speichert Entwicklungszustände von Datein über den Projektverlauf hinweg. Es gehört mittlerweile zu der grundlegenden Arbeitsweise der Entwicklungsbranche(besonders im Open Source Bereich) und wurde speziell für die Zusammenarbeit von vielen Entwickler:innen von Linus Torvalds entwickelt. 
+Kurz gesagt ein Versionskontrollsystem, es speichert Entwicklungszustände von Dateien über den Projektverlauf hinweg. Es gehört mittlerweile zu der grundlegenden Arbeitsweise der Entwicklungsbranche(besonders im Open Source Bereich) und wurde speziell für die Zusammenarbeit von vielen Entwickler:innen von Linus Torvalds entwickelt. 
 Dabei wird auf ein dezentrales System gesetzt, jede Person hat eine vollständige Kopie des Projekts oder "Repositories" und auch den gesamten Verlauf lokal auf dem Rechner. Es braucht einen zentralen Computer nur zum Austausch der eingereichten Arbeit. 
 
 Prominente Implementierungen von Git sind GitHub, GitLab oder Bitbucket. 
 
 ### Warum sollte Git verwendet werden?
-Die Verwendung einer Versionskontrolle hilft dabei den Komplexen und zum Teil schwierig zu durchschauenden Entwicklungsprozess zu organisieren und besser nachvollziehbar zu machen. Es verbessert die Möglichkeit das verscheidene Personen parallel an dem gleichen Projekt arbeiten können und Fehler nachträglich rückgängig gemacht werden können. 
+Die Verwendung einer Versionskontrolle hilft dabei den Komplexen und zum Teil schwierig zu durchschauenden Entwicklungsprozess zu organisieren und besser nachvollziehbar zu machen. Es verbessert die Möglichkeit, dass verschiedene Personen parallel an dem gleichen Projekt arbeiten können und Fehler nachträglich rückgängig gemacht werden können. 
 Entwickler haben eigene Umgebungen(Branches) in denen ausprobiert und experimentiert werden kann ohne das Hauptprojekt zu gefährden. 
 
 ### Wichtige Grundbefehle von Git (aus der Vorlesung)
@@ -68,7 +68,7 @@ More diff commands (effektiver Vergleich mit anderen Diff-Befehlen)
 
 ### Branches und Merge-Konflikte
 Mit den Branches können unterschiedliche Personen und Kontexte oder Aufgaben getrennt werden. 
-Mergekonflikte können auftauchen wenn Inhalte verschiedener Branches zusammengefügt(gemerged) werden. Konflikt bedeutet das an gleichen Stellen in der selben Datei unterschiedliche Inhalte stehen. Beim Lösen der Konflikte helfen moderne IDE's oder Anwendungen wie Github Desktop, die die Differenzbereiche hervorheben sodass dann entschieden werden kann welche Änderung gemacht weden soll.
+Mergekonflikte können auftauchen wenn Inhalte verschiedener Branches zusammengefügt(gemerged) werden. Konflikt bedeutet, dass an gleichen Stellen in der selben Datei unterschiedliche Inhalte stehen. Beim Lösen der Konflikte helfen moderne IDE's oder Anwendungen wie Github Desktop, die die Differenzbereiche hervorheben sodass dann entschieden werden kann welche Änderung gemacht werden soll.
 
 ### Lokal Repository und Remote Repository
 **Working Directory:** Lokal auf deinem Rechner, alle deine Änderungen werden hier gespeichert.
@@ -79,6 +79,6 @@ Mergekonflikte können auftauchen wenn Inhalte verschiedener Branches zusammenge
 Github bietet als Plattform das Zuhause und die Zentrale Verwaltungsstelle für Projektdateien und Projektmanagement, hier werden committe Änderungen angezeigt und andere Personen können diese bei sich runterladen um sie zu Testen oder daran weiterzuarbeiten. 
 
 ### Beiträge im Team 
-- **Leonel:** Init des Projekts, Abschnitte "Projektbeschreibung", "Funktioonale Anforderungen aus dem Kurs", "Technologien", "Entwicklung"
+- **Leonel:** Init des Projekts, Abschnitte "Projektbeschreibung", "Funktionale Anforderungen aus dem Kurs", "Technologien", "Entwicklung"
 
 - **Jannis:** "Was ist Git?", "Warum sollte Git verwendet werden?", "Wichtige Grundbefehle von Git", "Branches und Merge-Konflikte", "Lokal Repository und Remote Repository", "Github als Austauschplattform "
